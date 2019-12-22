@@ -4,7 +4,7 @@ import { BASE_API_URL } from '../constants/constants';
 
 import './Login.css';
 
-export const Login = () => {
+export const Login = (props) => {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ userType, setUserType ] = useState('');
@@ -17,7 +17,8 @@ export const Login = () => {
 				userType
 			})
 			.then((repsonse) => {
-				console.log(repsonse.data);
+				localStorage.setItem('user', JSON.stringify(repsonse.data.data));
+				props.history.push('/users');
 			})
 			.catch((error) => {
 				console.log(error.repsonse);
