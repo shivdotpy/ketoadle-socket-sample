@@ -1,0 +1,15 @@
+.leftChatBox {
+    margin-right: 10%;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.rightChatBox {
+    margin-left: 10%;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

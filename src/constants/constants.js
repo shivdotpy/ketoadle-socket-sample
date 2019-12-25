@@ -1,1 +1,1 @@
-export const BASE_API_URL = 'https://api-ketoadle.herokuapp.com'
+export const BASE_API_URL = 'http://localhost:5000'

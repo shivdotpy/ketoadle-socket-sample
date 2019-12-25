@@ -3,11 +3,12 @@ import axios from 'axios';
 import { BASE_API_URL } from '../constants/constants';
 
 import './Login.css';
+import { suscribeToSocket } from '../socket/socket.io';
 
 export const Login = (props) => {
-	const [ email, setEmail ] = useState('');
-	const [ password, setPassword ] = useState('');
-	const [ userType, setUserType ] = useState('');
+	const [ email, setEmail ] = useState('shiv@gmail.com');
+	const [ password, setPassword ] = useState('Hello@123');
+	const [ userType, setUserType ] = useState('recruiter');
 
 	const onSubmit = () => {
 		axios
@@ -18,6 +19,7 @@ export const Login = (props) => {
 			})
 			.then((repsonse) => {
 				localStorage.setItem('user', JSON.stringify(repsonse.data.data));
+				suscribeToSocket(repsonse.data.data.token)
 				props.history.push('/users');
 			})
 			.catch((error) => {
