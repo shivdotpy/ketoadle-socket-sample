@@ -42,9 +42,11 @@ export const Chat = (props) => {
 
 	const subscribeToMessage = () => {
 		global.socket.on('chatMessage', (data) => {
-			const tempHistory = [ ...chatHistory ];
-			tempHistory.push(data);
-			setChatHistory(tempHistory);
+			console.log('data', )
+			getChatHistory();
+			// const tempHistory = [ ...chatHistory ];
+			// tempHistory.push(data);
+			// setChatHistory(tempHistory);
 		});
 	};
 
