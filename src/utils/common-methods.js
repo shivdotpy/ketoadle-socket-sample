@@ -17,6 +17,10 @@ export const getUserType = () => {
 	return JSON.parse(localStorage.getItem('user')).userType;
 };
 
+export const getUserName = () => {
+    return JSON.parse(localStorage.getItem('user')).name;
+}
+
 export const getAccessToken = () => {
     return JSON.parse(localStorage.getItem('user')).token;
 }

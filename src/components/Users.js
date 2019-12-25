@@ -30,14 +30,14 @@ export const Users = (props) => {
 										<p className="card-text">E-mail : {user.email}</p>
 										<p>I am a : {user.userType === 'recruiter' ? 'Recruiter' : 'Job Seeker'}</p>
 										{user.userType === getUserType() ? (
-											<button disabled className="btn btn-warning">
+											<button disabled className="btn btn-warning" style={{cursor: 'not-allowed'}}>
 												Chat not available
 											</button>
 										) : (
 											<button
 												className="btn btn-info"
 												onClick={() => {
-													props.history.push(`/chat?with=${user._id}`);
+													props.history.push(`/chat/${user._id}`);
 												}}
 											>
 												Chat with me

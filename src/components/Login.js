@@ -19,7 +19,7 @@ export const Login = (props) => {
 			})
 			.then((repsonse) => {
 				localStorage.setItem('user', JSON.stringify(repsonse.data.data));
-				suscribeToSocket(repsonse.data.data.token)
+				suscribeToSocket(repsonse.data.data.token);
 				props.history.push('/users');
 			})
 			.catch((error) => {
@@ -45,6 +45,7 @@ export const Login = (props) => {
 					<input
 						className="form-control"
 						placeholder="password"
+						type="password"
 						onChange={(event) => setPassword(event.target.value)}
 						value={password}
 					/>
