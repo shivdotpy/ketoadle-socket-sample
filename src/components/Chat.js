@@ -7,6 +7,7 @@ import { BASE_API_URL } from '../constants/constants';
 export const Chat = (props) => {
 	const [ chatMessage, setChatMessage ] = useState('');
 	const [ chatHistory, setChatHistory ] = useState([]);
+	const [chatId, setChatId] = useState('');
 	const [ yourId, setYourId ] = useState(parseJwt(JSON.parse(localStorage.getItem('user')).token)._id);
 
 	// check if logged in user is recruiter of jobSeeker
@@ -31,6 +32,7 @@ export const Chat = (props) => {
 			})
 			.then((response) => {
 				getChatHistory(response.data.data);
+				setChatId(response.data.data);
 				subscribeToMessage(response.data.data);
 			})
 			.catch((error) => {
@@ -52,7 +54,7 @@ export const Chat = (props) => {
 		}
 
 		global.socket.emit('message', {
-			chatId: '5dd143c39ee7e00017a94596-5dd143f89ee7e00017a94599',
+			chatId,
 			name: getUserName(),
 			message: chatMessage,
 			userId: parseJwt(JSON.parse(localStorage.getItem('user')).token)._id
