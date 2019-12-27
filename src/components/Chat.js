@@ -31,13 +31,8 @@ export const Chat = (props) => {
 				}
 			})
 			.then((response) => {
-
-				// CHAT ID
-				console.log('response.data.data', response.data.data);
-				
-
 				getChatHistory(response.data.data);
-				setChatId(response.data.data);
+				global.chatId = response.data.data;
 				subscribeToMessage(response.data.data);
 			})
 			.catch((error) => {
@@ -47,10 +42,7 @@ export const Chat = (props) => {
 
 	const subscribeToMessage = () => {
 		global.socket.on('chatMessage', (data) => {
-			getChatHistory(chatId);
-			// const tempHistory = [ ...chatHistory ];
-			// tempHistory.push(data);
-			// setChatHistory(tempHistory);
+			getChatHistory(global.chatId);
 		});
 	};
 
@@ -60,7 +52,7 @@ export const Chat = (props) => {
 		}
 
 		global.socket.emit('message', {
-			chatId,
+			chatId: global.chatId,
 			name: getUserName(),
 			message: chatMessage,
 			userId: parseJwt(JSON.parse(localStorage.getItem('user')).token)._id
@@ -80,7 +72,7 @@ export const Chat = (props) => {
 			.post(
 				`${BASE_API_URL}/api/chat/getChatHistory`,
 				{
-					chatId
+					chatId: chatId
 				},
 				{
 					headers: {
@@ -100,7 +92,7 @@ export const Chat = (props) => {
 		<div className="container mt-5">
 			<div className="card" style={{ height: '80vh' }}>
 				<div className="card-header text-center">Chat with userName</div>
-				<div className="card-body">
+				<div className="card-body" style={{overflowY: 'scroll'}}>
 					{chatHistory.length === 0 && <p>No chat available</p>}
 					{chatHistory.map((history) => {
 						if (history.userId === yourId) {
@@ -113,7 +105,7 @@ export const Chat = (props) => {
 						}
 						return (
 							<div className="leftChatBox alert alert-info">
-								<h4>Gaurav</h4>
+								<h4>{history.name}</h4>
 								<p>{history.message}</p>
 							</div>
 						);
